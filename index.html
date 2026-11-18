@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade 3 Pinewoodians Super Mathematicians</title>
+<meta name="description" content="Grade 3 order of operations quiz: Level 1 warm up, Level 2 super duper challenge, and two impossible problems to argue about.">
+<style>
+
+*{box-sizing:border-box}
+:root{
+  --ink:#15233d; --muted:#5b6780; --paper:#fbfaf3; --card:#fff;
+  --pine:#1c6b46; --pine-dark:#0f4a2e; --gold:#f0a92f; --gold-soft:#fff4d9;
+  --sky:#2f6fd0; --red:#c0392b; --ok:#147a4b; --line:#dde2ec;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);line-height:1.45;
+  font-family:ui-rounded,"Segoe UI",Roboto,system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:18px 16px 56px}
+:focus-visible{outline:3px solid #7fc09c;outline-offset:2px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-radius:22px;color:#fff;padding:26px 24px 24px;
+  background:linear-gradient(135deg,#14563a 0%,#1c6b46 45%,#2b8f5f 100%)}
+.hero::after{content:"× ÷ + −";position:absolute;right:-10px;bottom:-34px;font-size:120px;font-weight:800;
+  letter-spacing:6px;opacity:.12;pointer-events:none;white-space:nowrap}
+.hero h1{margin:0 0 6px;font-size:clamp(23px,4vw,37px);line-height:1.14;letter-spacing:-.015em}
+.hero p{margin:0;font-size:clamp(13.5px,1.7vw,17px);opacity:.94;font-weight:600}
+.rules{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.rule{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:650}
+.rule b{font-size:15px;line-height:1}
+.rule i{font-style:normal;font-weight:800;font-size:14px}
+
+/* ---------- toolbar ---------- */
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin:16px 0 2px;padding:10px 2px;background:rgba(251,250,243,.96);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.score{font-weight:800;font-size:15px;white-space:nowrap}
+.score b{color:var(--pine);font-size:18px}
+.meter{flex:1 1 140px;height:10px;border-radius:999px;background:#e6eaf2;overflow:hidden;min-width:110px}
+.meter span{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--pine),#43b57c);transition:width .3s ease}
+
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;
+  padding:8px 14px;font-weight:700;font-size:14px;transition:box-shadow .15s,transform .07s,background .15s}
+.btn:hover{box-shadow:0 2px 9px rgba(21,35,61,.13)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--pine);border-color:var(--pine);color:#fff}
+.btn.primary:hover{background:var(--pine-dark);border-color:var(--pine-dark)}
+.btn.small{padding:9px 14px;font-size:13.5px;border-radius:9px;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+
+/* ---------- sections ---------- */
+h2.sec{display:flex;align-items:center;gap:10px;margin:28px 0 4px;font-size:clamp(17px,2.3vw,22px);letter-spacing:-.01em}
+h2.sec .tag{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  background:#e8f3ec;color:var(--pine);border-radius:999px;padding:4px 10px}
+.secnote{margin:0 0 14px;color:var(--muted);font-size:14px;font-weight:600}
+
+/* ---------- cards ---------- */
+.cards{display:grid;gap:13px}
+@media (min-width:740px){.cards{grid-template-columns:1fr 1fr}}
+.card{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:15px 15px 12px;box-shadow:0 1px 2px rgba(21,35,61,.05)}
+.card .num{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:#eef2f8;
+  color:var(--muted);font-weight:800;font-size:14px;display:grid;place-items:center}
+.card .body{flex:1 1 auto;min-width:0}
+.eq{margin:6px 0 12px;font-size:clamp(19px,2.5vw,24px);font-weight:750;line-height:1.3;
+  font-variant-numeric:tabular-nums;letter-spacing:.005em}
+.v{display:inline-block;min-width:1.25em;text-align:center;padding:0 .16em;border-radius:8px;
+  background:var(--gold-soft);border:2px dashed #dda63c;color:#96550a;font-style:italic;font-weight:800}
+
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansLabel{font-weight:800;font-size:17px;color:var(--muted);font-style:italic}
+input.ans{width:86px;padding:7px 8px;font:inherit;font-size:19px;font-weight:800;text-align:center;
+  color:var(--pine-dark);background:#fcfdff;border:2px solid #ccd4e2;border-radius:10px;
+  font-variant-numeric:tabular-nums;transition:border-color .15s,box-shadow .15s,background .15s}
+input.ans:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(47,111,208,.18)}
+input.ans::placeholder{color:#b6bfd0;font-weight:700}
+.card.solved input.ans{border-color:#86cfa9;background:#f2fbf6}
+.card.solved .num{background:#d9f2e4;color:var(--pine)}
+
+.mark{min-height:21px;margin-top:7px;font-size:14px;font-weight:800}
+.mark.ok{color:var(--ok)}
+.mark.no{color:var(--red)}
+.shake{animation:shake .34s ease-in-out}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}
+  60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+
+.panel{display:none;margin-top:4px;padding:10px 12px;border-radius:11px;font-size:14.5px;line-height:1.5}
+.panel.show{display:block;animation:pop .2s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.panel.hintP{background:#eef4ff;border:1px solid #cfdff9;color:#1e4272}
+.panel.ansP{background:#f0faf4;border:1px solid #bfe3cf;color:#125437}
+.panel .work{font-size:13.5px;opacity:.92}
+
+/* ---------- super duper challenge ---------- */
+.challenge{margin-top:34px;padding:6px 16px 18px;border-radius:20px;border:2px solid #f2c877;
+  background:linear-gradient(180deg,#fffaef,#fffdf7)}
+.challenge h2.sec{margin-top:14px;color:#8a4a00}
+.challenge h2.sec .tag{background:#fde9c4;color:#8a4a00}
+.challenge .secnote{color:#8a6a35}
+.challenge .card{border-color:#f0d9ae;box-shadow:0 2px 0 #f7e6c4}
+.challenge .card .num{background:#fde9c4;color:#8a4a00}
+.badge{display:inline-flex;align-items:center;gap:6px;margin:0 0 2px;font-size:10.5px;font-weight:850;
+  letter-spacing:.1em;text-transform:uppercase;color:#8a4a00;background:#fde9c4;
+  border-radius:999px;padding:3px 9px}
+
+/* ---------- notes + footer ---------- */
+details.notes{margin-top:30px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 16px}
+details.notes[open]{border-color:#bcc6d6;padding-bottom:14px}
+details.notes summary{cursor:pointer;padding:14px 0;font-weight:800;font-size:15.5px;list-style:none;
+  display:flex;align-items:center;gap:9px}
+details.notes summary::-webkit-details-marker{display:none}
+details.notes summary::before{content:"▸";color:var(--pine);font-size:15px;transition:transform .18s}
+details.notes[open] summary::before{transform:rotate(90deg)}
+details.notes h3{margin:16px 0 6px;font-size:15px;color:var(--pine)}
+details.notes p,details.notes li{font-size:14.5px;color:#31405c}
+details.notes ul{margin:6px 0 0;padding-left:20px}
+details.notes li{margin-bottom:4px}
+.key{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}
+.key th,.key td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+.key th{background:#f3f6fb;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.key td.ans{text-align:center;font-weight:800;color:var(--pine)}
+footer.note{margin-top:26px;text-align:center;color:var(--muted);font-size:13px;font-weight:600}
+
+/* ---------- print: worksheet ---------- */
+@media print{
+  @page{size:A4 portrait;margin:13mm 12mm}
+  html,body{background:#fff}
+  body{font-size:11pt}
+  .wrap{max-width:none;padding:0}
+  .hero{background:#fff;color:#000;border:2px solid #111;border-radius:0;padding:10px 12px}
+  .hero::after{display:none}
+  .hero h1{font-size:17pt}
+  .hero p{font-size:10.5pt}
+  .rule{background:#fff;border:1px solid #7a7a7a;color:#000;font-size:8.6pt;padding:3px 8px}
+  .rule b{font-size:9pt}
+  .bar,.btn,.mark,.meter{display:none!important}
+  h2.sec{font-size:12.5pt;margin:12pt 0 2pt}
+  h2.sec .tag{background:#fff;border:1px solid #777;color:#000}
+  .secnote{font-size:9pt;margin-bottom:7pt}
+  .cards{grid-template-columns:1fr!important;gap:0}
+  .card{border:0;border-bottom:1px solid #c9c9c9;border-radius:0;box-shadow:none;padding:7pt 0;
+    break-inside:avoid;page-break-inside:avoid}
+  .card .num{background:#fff;border:1px solid #999;color:#000;width:19pt;height:19pt;font-size:9.5pt}
+  .eq{font-size:13pt;margin:2pt 0 6pt}
+  .v{background:#fff;border:1.5px dashed #444;color:#000}
+  .ansLabel{font-size:11pt}
+  input.ans{border:0;border-bottom:1.6px solid #222;border-radius:0;background:#fff;
+    width:58pt;padding:0 2pt;font-size:12pt;color:#000}
+  input.ans::placeholder{color:transparent}
+  /* answers and hints stay off the worksheet unless the teacher reveals them first */
+  .panel{display:none!important;border:1px solid #bbb;background:#fff;color:#000;font-size:9pt}
+  .panel.show{display:block!important;animation:none!important}
+  .challenge{background:#fff;border:2px solid #111;border-radius:0;padding:4pt 10pt 10pt}
+  .challenge h2.sec{color:#000}
+  .challenge .card{border-color:#c9c9c9;box-shadow:none}
+  .badge{background:#fff;border:1px solid #444;color:#000}
+  details.notes{border:1px solid #999;border-radius:0;padding:0 10pt;break-inside:auto}
+  details.notes:not([open]){display:none!important}
+  .key{font-size:9pt}
+  footer.note{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+
+/* ---------- two-level layout ---------- */
+.secsub{margin:24px 0 4px;font-size:clamp(15px,2vw,18px);font-weight:850;
+  color:var(--pine-dark);letter-spacing:.01em}
+.card.tricky{background:#fdf9ff;border-color:#dcc6f2}
+.card.tricky.solved{background:#f4fbf7;border-color:#86cfa9}
+.key td.ans{white-space:nowrap}
+@media print{
+  .card.tricky{background:#fff;border-color:#c9c9c9}
+  .card.tricky.solved{background:#fff;border-color:#c9c9c9}
+  .secsub{color:#000}
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>Grade 3 Pinewoodians Super Mathematicians</h1>
+    <p>Order of operations &middot; <b>Level 1</b> warm up, <b>Level 2</b> challenge, then two puzzles that may not be possible at all</p>
+    <div class="rules">
+      <span class="rule"><b>( )</b> Brackets first</span>
+      <span class="rule"><b>&times; &divide;</b> then multiply and divide</span>
+      <span class="rule"><b>+ &minus;</b> add and subtract last</span>
+      <span class="rule"><i>n</i> the mystery number</span>
+    </div>
+  </header>
+
+  <div class="bar">
+    <span class="score">Correct: <b id="scoreNum">0</b> / <span id="scoreTotal">13</span></span>
+    <span class="meter" aria-hidden="true"><span id="meterFill"></span></span>
+    <button class="btn small" type="button" id="showAll">Show all answers</button>
+    <button class="btn small" type="button" id="hideAll">Hide all answers</button>
+    <button class="btn small" type="button" id="resetAll">Reset</button>
+  </div>
+
+  <h2 class="sec">Level 1 &middot; Warm up <span class="tag">6 questions</span></h2>
+  <p class="secnote">Work out the value of <i>n</i>. Type your answer, then press <b>Check</b> or the Enter key.</p>
+  <div class="cards">
+      <article class="card" data-ans="11" data-id="q1" data-tries="0">
+        <div class="num">1</div>
+        <div class="body">
+          <div class="eq">3 + 4 × 2 = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a1">n&nbsp;=</label>
+            <input class="ans" id="a1" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 1">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q1">Hint</button>
+          </div>
+          <div class="mark" id="mark-q1" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q1"><b>Hint:</b> Multiply before you add. Start with 4 × 2.</div>
+          <div class="panel ansP" id="ans-q1"><b>Answer:</b> n = 11<br>
+            <span class="work">4 × 2 = 8, then 3 + 8 = 11</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="8" data-id="q2" data-tries="0">
+        <div class="num">2</div>
+        <div class="body">
+          <div class="eq">20 − 3 × 4 = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a2">n&nbsp;=</label>
+            <input class="ans" id="a2" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 2">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q2">Hint</button>
+          </div>
+          <div class="mark" id="mark-q2" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q2"><b>Hint:</b> Multiply before you subtract. Start with 3 × 4.</div>
+          <div class="panel ansP" id="ans-q2"><b>Answer:</b> n = 8<br>
+            <span class="work">3 × 4 = 12, then 20 − 12 = 8</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="16" data-id="q3" data-tries="0">
+        <div class="num">3</div>
+        <div class="body">
+          <div class="eq">2 × (3 + 5) = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a3">n&nbsp;=</label>
+            <input class="ans" id="a3" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 3">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q3">Hint</button>
+          </div>
+          <div class="mark" id="mark-q3" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q3"><b>Hint:</b> Brackets first! Work out 3 + 5.</div>
+          <div class="panel ansP" id="ans-q3"><b>Answer:</b> n = 16<br>
+            <span class="work">(3 + 5) = 8, then 2 × 8 = 16</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="9" data-id="q4" data-tries="0">
+        <div class="num">4</div>
+        <div class="body">
+          <div class="eq">12 ÷ 3 + 5 = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a4">n&nbsp;=</label>
+            <input class="ans" id="a4" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 4">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q4">Hint</button>
+          </div>
+          <div class="mark" id="mark-q4" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q4"><b>Hint:</b> Divide before you add. Start with 12 ÷ 3.</div>
+          <div class="panel ansP" id="ans-q4"><b>Answer:</b> n = 9<br>
+            <span class="work">12 ÷ 3 = 4, then 4 + 5 = 9</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="8" data-id="q5" data-tries="0">
+        <div class="num">5</div>
+        <div class="body">
+          <div class="eq"><span class="v">n</span> + 2 × 6 = 20</div>
+          <div class="row">
+            <label class="ansLabel" for="a5">n&nbsp;=</label>
+            <input class="ans" id="a5" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 5">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q5">Hint</button>
+          </div>
+          <div class="mark" id="mark-q5" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q5"><b>Hint:</b> Work out 2 × 6 first, then ask: what plus that makes 20?</div>
+          <div class="panel ansP" id="ans-q5"><b>Answer:</b> n = 8<br>
+            <span class="work">2 × 6 = 12, so n + 12 = 20, and n = 8</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="6" data-id="q6" data-tries="0">
+        <div class="num">6</div>
+        <div class="body">
+          <div class="eq">3 × <span class="v">n</span> + 3 = 21</div>
+          <div class="row">
+            <label class="ansLabel" for="a6">n&nbsp;=</label>
+            <input class="ans" id="a6" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 6">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q6">Hint</button>
+          </div>
+          <div class="mark" id="mark-q6" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q6"><b>Hint:</b> Take off the + 3 first, then ask: 3 × what gives what is left?</div>
+          <div class="panel ansP" id="ans-q6"><b>Answer:</b> n = 6<br>
+            <span class="work">21 − 3 = 18, and 3 × 6 = 18, so n = 6</span></div>
+        </div>
+      </article>
+  </div>
+
+  <section class="challenge">
+    <h2 class="sec">&#11088; Level 2 &middot; Super Duper Challenge <span class="tag">7 questions</span></h2>
+    <p class="secnote">Only for super mathematicians &mdash; more steps to plan, and the mystery number can hide in the middle.</p>
+    <div class="cards">
+      <article class="card" data-ans="13" data-id="q7" data-tries="0">
+        <div class="num">7</div>
+        <div class="body">
+          <span class="badge">Super duper challenge</span>
+          <div class="eq">3 × (4 + 2) − 5 = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a7">n&nbsp;=</label>
+            <input class="ans" id="a7" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 7">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q7">Hint</button>
+          </div>
+          <div class="mark" id="mark-q7" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q7"><b>Hint:</b> Three jobs in order: brackets, multiply, subtract.</div>
+          <div class="panel ansP" id="ans-q7"><b>Answer:</b> n = 13<br>
+            <span class="work">4 + 2 = 6, 3 × 6 = 18, then 18 − 5 = 13</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="7" data-id="q8" data-tries="0">
+        <div class="num">8</div>
+        <div class="body">
+          <span class="badge">Super duper challenge</span>
+          <div class="eq">2 × <span class="v">n</span> + 3 × 4 = 26</div>
+          <div class="row">
+            <label class="ansLabel" for="a8">n&nbsp;=</label>
+            <input class="ans" id="a8" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 8">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q8">Hint</button>
+          </div>
+          <div class="mark" id="mark-q8" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q8"><b>Hint:</b> Two multiply-first jobs. Do 3 × 4, then see what is left for 2 × n.</div>
+          <div class="panel ansP" id="ans-q8"><b>Answer:</b> n = 7<br>
+            <span class="work">3 × 4 = 12, so 2 × n = 26 − 12 = 14, and n = 7</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="16" data-id="q9" data-tries="0">
+        <div class="num">9</div>
+        <div class="body">
+          <span class="badge">Super duper challenge</span>
+          <div class="eq">40 ÷ (2 + 3) + 4 × 2 = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a9">n&nbsp;=</label>
+            <input class="ans" id="a9" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 9">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q9">Hint</button>
+          </div>
+          <div class="mark" id="mark-q9" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q9"><b>Hint:</b> Brackets first, then divide and multiply, then add last.</div>
+          <div class="panel ansP" id="ans-q9"><b>Answer:</b> n = 16<br>
+            <span class="work">2 + 3 = 5, 40 ÷ 5 = 8, 4 × 2 = 8, then 8 + 8 = 16</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="15" data-id="q10" data-tries="0">
+        <div class="num">10</div>
+        <div class="body">
+          <span class="badge">Super duper challenge</span>
+          <div class="eq">(12 ÷ 3) × (2 + 3) − 5 = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a10">n&nbsp;=</label>
+            <input class="ans" id="a10" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 10">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q10">Hint</button>
+          </div>
+          <div class="mark" id="mark-q10" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q10"><b>Hint:</b> Both brackets first, then multiply, then subtract.</div>
+          <div class="panel ansP" id="ans-q10"><b>Answer:</b> n = 15<br>
+            <span class="work">12 ÷ 3 = 4 and 2 + 3 = 5, 4 × 5 = 20, then 20 − 5 = 15</span></div>
+        </div>
+      </article>
+      <article class="card" data-ans="16" data-id="q11" data-tries="0">
+        <div class="num">11</div>
+        <div class="body">
+          <span class="badge">Super duper challenge</span>
+          <div class="eq">4 × (10 − 2 × 3) = <span class="v">n</span></div>
+          <div class="row">
+            <label class="ansLabel" for="a11">n&nbsp;=</label>
+            <input class="ans" id="a11" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 11">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q11">Hint</button>
+          </div>
+          <div class="mark" id="mark-q11" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q11"><b>Hint:</b> Inside the brackets, multiply before you subtract.</div>
+          <div class="panel ansP" id="ans-q11"><b>Answer:</b> n = 16<br>
+            <span class="work">2 × 3 = 6, 10 − 6 = 4, then 4 × 4 = 16</span></div>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="secsub">The last two &middot; think before you answer</h3>
+    <p class="secnote">There is a trick in each of these two. Try some whole numbers first. If you are sure no
+    whole number works, type the word <b>impossible</b> and press Check.</p>
+    <div class="cards">
+      <article class="card tricky" data-ans="" data-impossible="1" data-id="q12" data-tries="0">
+        <div class="num">12</div>
+        <div class="body">
+          <span class="badge">Read carefully</span>
+          <div class="eq">2 × <span class="v">n</span> + 3 = 12</div>
+          <div class="row">
+            <label class="ansLabel" for="a12">n&nbsp;=</label>
+            <input class="ans" id="a12" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 12">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q12">Hint</button>
+          </div>
+          <div class="mark" id="mark-q12" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q12"><b>Hint:</b> Try n = 1, 2, 3, 4, 5. Does any of them give exactly 12?</div>
+          <div class="panel ansP" id="ans-q12"><b>Answer:</b> Impossible &mdash; n would be 4&frac12;, and 4&frac12; is not a whole number.<br>
+            <span class="work">2 &times; 4 + 3 = 11 and 2 &times; 5 + 3 = 13, so you jump right over 12. No whole number fits.</span></div>
+        </div>
+      </article>
+      <article class="card tricky" data-ans="" data-impossible="1" data-id="q13" data-tries="0">
+        <div class="num">13</div>
+        <div class="body">
+          <span class="badge">Read carefully</span>
+          <div class="eq"><span class="v">n</span> × 0 = 5</div>
+          <div class="row">
+            <label class="ansLabel" for="a13">n&nbsp;=</label>
+            <input class="ans" id="a13" type="text" autocomplete="off"
+                   spellcheck="false" placeholder="?" aria-label="Your answer for question 13">
+            <button class="btn small primary" type="button" data-check>Check</button>
+            <button class="btn small" type="button" data-hint aria-expanded="false"
+                    aria-controls="hint-q13">Hint</button>
+          </div>
+          <div class="mark" id="mark-q13" aria-live="polite"></div>
+          <div class="panel hintP" id="hint-q13"><b>Hint:</b> What do you always get when you multiply by 0?</div>
+          <div class="panel ansP" id="ans-q13"><b>Answer:</b> Impossible &mdash; anything times 0 is 0, so it can never be 5.<br>
+            <span class="work">0 &times; 0 = 0, 4 &times; 0 = 0, 100 &times; 0 = 0. It is always 0, so nothing can make 5.</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <details class="notes">
+    <summary>Teacher notes &amp; answer key (click to open)</summary>
+
+    <h3>How to run it in 10 minutes</h3>
+    <ul>
+      <li><b>1 min</b> &mdash; Read the four rules at the top together. Ask: <i>&ldquo;Which part do we do first?&rdquo;</i></li>
+      <li><b>4 min</b> &mdash; Level 1, questions 1&ndash;6 on paper, then share strategies with a partner.</li>
+      <li><b>3 min</b> &mdash; Level 2 challenges 7&ndash;11, in pairs. Question 8 has two multiply-first jobs.</li>
+      <li><b>2 min</b> &mdash; The last two, as a class. Let them argue before you say anything.</li>
+    </ul>
+
+    <h3>What each level practises</h3>
+    <ul>
+      <li><b>Level 1 (1&ndash;6)</b> &mdash; multiply or divide before adding or subtracting (1, 2, 4); brackets first (3);
+        and two where the mystery number sits inside the sum (5, 6).</li>
+      <li><b>Level 2 (7&ndash;11)</b> &mdash; three or four steps, two sets of brackets, brackets that must beat
+        everything else (9, 11), and two multiply-first jobs (8).</li>
+      <li><b>The last two (12, 13)</b> &mdash; checking whether an answer even exists. The maths is small; the thinking is big.</li>
+    </ul>
+
+    <h3>The two impossible problems &mdash; slow down here</h3>
+    <ul>
+      <li><b>12 &middot; 2 &times; n + 3 = 12.</b> Put in whole numbers: 2 &times; 4 + 3 = 11, then 2 &times; 5 + 3 = 13.
+        The answers step by 2, so they jump straight over 12. The only solution is 4&frac12;, which is not a whole
+        number. Ask: <i>&ldquo;Which two numbers did we jump between?&rdquo;</i></li>
+      <li><b>13 &middot; n &times; 0 = 5.</b> Anything times 0 is 0. If a child says <i>n</i> = 5, have them test it:
+        5 &times; 0 = 0, not 5. The same happens for every number they try, which is the proof.</li>
+      <li><b>Why it is worth the time</b> &mdash; it teaches children to check by substituting, and that sometimes
+        the puzzle is the problem, not the child. Both cards accept the word <i>impossible</i> as a correct answer.</li>
+    </ul>
+
+    <h3>Answers you may hear (and what to say)</h3>
+    <ul>
+      <li><b>&ldquo;3 + 4 = 7, 7 &times; 2 = 14&rdquo;</b> for question 1 &mdash; they worked left to right.
+        Ask them to find the &times; sign and do that part first.</li>
+      <li><b>&ldquo;n = 12&rdquo;</b> for question 5 &mdash; they found 2 &times; 6 but forgot the rest of the equation.
+        Point back to it and ask what else has to happen.</li>
+      <li><b>&ldquo;n = 4&rdquo;</b> for question 12 &mdash; have them check it: 2 &times; 4 + 3 = 11, not 12.</li>
+      <li><b>&ldquo;n = 5&rdquo;</b> for question 13 &mdash; have them check it: 5 &times; 0 = 0, not 5.</li>
+      <li><b>&ldquo;This one is broken!&rdquo;</b> for 12 or 13 &mdash; agree with them, then name it: mathematicians
+        prove when something cannot be done.</li>
+    </ul>
+
+    <h3>Printing</h3>
+    <p>Leave the answers hidden and print for a clean worksheet: the buttons, hints and answers never print,
+    and each answer box prints as a blank line. Click <b>Show all answers</b> first, or open these notes,
+    to print an answer key instead.</p>
+
+    <h3>Answer key</h3>
+    <table class="key">
+      <thead><tr><th>#</th><th>Equation</th><th>n</th></tr></thead>
+      <tbody><tr><td>1</td><td>3 + 4 × 2 = n</td><td class="ans">11</td></tr><tr><td>2</td><td>20 − 3 × 4 = n</td><td class="ans">8</td></tr><tr><td>3</td><td>2 × (3 + 5) = n</td><td class="ans">16</td></tr><tr><td>4</td><td>12 ÷ 3 + 5 = n</td><td class="ans">9</td></tr><tr><td>5</td><td>n + 2 × 6 = 20</td><td class="ans">8</td></tr><tr><td>6</td><td>3 × n + 3 = 21</td><td class="ans">6</td></tr><tr><td>7</td><td>3 × (4 + 2) − 5 = n</td><td class="ans">13</td></tr><tr><td>8</td><td>2 × n + 3 × 4 = 26</td><td class="ans">7</td></tr><tr><td>9</td><td>40 ÷ (2 + 3) + 4 × 2 = n</td><td class="ans">16</td></tr><tr><td>10</td><td>(12 ÷ 3) × (2 + 3) − 5 = n</td><td class="ans">15</td></tr><tr><td>11</td><td>4 × (10 − 2 × 3) = n</td><td class="ans">16</td></tr><tr><td>12</td><td>2 × n + 3 = 12</td><td class="ans">impossible</td></tr><tr><td>13</td><td>n × 0 = 5</td><td class="ans">impossible</td></tr></tbody>
+    </table>
+  </details>
+
+  <footer class="note">Grade 3 Pinewoodians &middot; works offline &middot; no internet needed</footer>
+</div>
+<script>
+
+(function () {
+  "use strict";
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+  var scoreNum = document.getElementById("scoreNum");
+  var scoreTotal = document.getElementById("scoreTotal");
+  var meterFill = document.getElementById("meterFill");
+  var TOTAL = cards.length;
+  scoreTotal.textContent = TOTAL;
+
+  function solvedCount() {
+    return cards.filter(function (c) { return c.dataset.solved === "1"; }).length;
+  }
+
+  function paintScore() {
+    var n = solvedCount();
+    scoreNum.textContent = n;
+    meterFill.style.width = (n / TOTAL * 100) + "%";
+  }
+
+  function panel(el, open) {
+    if (el) el.classList.toggle("show", open);
+  }
+
+  /* Grade 3 answers are whole numbers; the two trick cards also accept "impossible". */
+  function digits(value) {
+    var v = String(value || "").replace(/\s+/g, "").replace(/^n=/i, "");
+    return /^-?\d+$/.test(v) ? parseInt(v, 10) : null;
+  }
+
+  function saysImpossible(value) {
+    var w = String(value || "").toLowerCase().replace(/[^a-z]/g, "");
+    if (!w) return false;
+    return w === "no" || w === "none" || w === "nope" || w === "never" || w === "cant"
+      || w === "cannot" || w === "impossible" || w === "notpossible"
+      || w === "nowholenumber" || w === "nosolution" || w === "noanswer"
+      || w.indexOf("impossible") === 0;
+  }
+
+  function markSolved(card, message) {
+    card.dataset.solved = "1";
+    card.classList.add("solved");
+    var mark = card.querySelector(".mark");
+    mark.className = "mark ok";
+    mark.textContent = message;
+    panel(card.querySelector(".ansP"), true);
+    panel(card.querySelector(".hintP"), false);
+    card.querySelector("input.ans").setAttribute("aria-invalid", "false");
+    paintScore();
+  }
+
+  function markWrong(card, message) {
+    var tries = (parseInt(card.dataset.tries, 10) || 0) + 1;
+    card.dataset.tries = String(tries);
+    var mark = card.querySelector(".mark");
+    mark.className = "mark no";
+    mark.textContent = (tries >= 2 ? message + " A hint is open below." : message);
+    card.classList.remove("shake");
+    void card.offsetWidth;
+    card.classList.add("shake");
+    if (tries >= 2) panel(card.querySelector(".hintP"), true);
+    var input = card.querySelector("input.ans");
+    input.setAttribute("aria-invalid", "true");
+    input.focus();
+    input.select();
+  }
+
+  function check(card) {
+    var input = card.querySelector("input.ans");
+    var raw = input.value;
+    var got = digits(raw);
+
+    if (card.dataset.impossible === "1") {
+      if (saysImpossible(raw)) {
+        markSolved(card, "\u2713 Correct! It really is impossible.");
+      } else if (got !== null) {
+        markWrong(card, "That number does not make the equation true. Try it and see.");
+      } else {
+        var m = card.querySelector(".mark");
+        m.className = "mark no";
+        m.textContent = "Try a number, or type the word impossible if you are sure it cannot be done.";
+        input.focus();
+      }
+      return;
+    }
+
+    if (got === null) {
+      if (saysImpossible(raw)) {
+        markWrong(card, "Not yet \u2014 this one does have a whole-number answer.");
+      } else {
+        var m2 = card.querySelector(".mark");
+        m2.className = "mark no";
+        m2.textContent = "Type a whole number first.";
+        input.focus();
+      }
+      return;
+    }
+
+    if (got === parseInt(card.dataset.ans, 10)) {
+      markSolved(card, "\u2713 Correct!");
+    } else {
+      markWrong(card, "Not yet \u2014 try again.");
+    }
+  }
+
+  cards.forEach(function (card) {
+    var input = card.querySelector("input.ans");
+    card.querySelector("[data-check]").addEventListener("click", function () { check(card); });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); check(card); }
+    });
+    var hintBtn = card.querySelector("[data-hint]");
+    hintBtn.addEventListener("click", function () {
+      var p = card.querySelector(".hintP");
+      var open = !p.classList.contains("show");
+      panel(p, open);
+      hintBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      hintBtn.textContent = open ? "Hide hint" : "Hint";
+    });
+  });
+
+  document.getElementById("showAll").addEventListener("click", function () {
+    cards.forEach(function (c) { panel(c.querySelector(".ansP"), true); });
+  });
+
+  document.getElementById("hideAll").addEventListener("click", function () {
+    cards.forEach(function (c) {
+      if (c.dataset.solved !== "1") panel(c.querySelector(".ansP"), false);
+    });
+  });
+
+  document.getElementById("resetAll").addEventListener("click", function () {
+    if (solvedCount() > 0 && !window.confirm("Clear all answers and start again?")) return;
+    cards.forEach(function (c) {
+      delete c.dataset.solved;
+      c.dataset.tries = "0";
+      c.classList.remove("solved", "shake");
+      c.querySelector("input.ans").value = "";
+      c.querySelector("input.ans").setAttribute("aria-invalid", "false");
+      var m = c.querySelector(".mark");
+      m.textContent = "";
+      m.className = "mark";
+      panel(c.querySelector(".ansP"), false);
+      panel(c.querySelector(".hintP"), false);
+      var hb = c.querySelector("[data-hint]");
+      hb.textContent = "Hint";
+      hb.setAttribute("aria-expanded", "false");
+    });
+    paintScore();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  paintScore();
+})();
+
+</script>
+</body>
+</html>
